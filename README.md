@@ -20,7 +20,9 @@ copy this in your bash terminal:
 slangc chase.slang -target spirv -entry main -stage compute -o chase.spv \[actual compilation]
 
 
+
 spirv-val --target-env vulkan1.3 chase.spv \[spir validation for vulkan 1.3]
+
 
 
 spirv-dis chase.spv > chase.txt \[dissasembly binary to a readable assembly text file]
@@ -30,4 +32,28 @@ spirv-dis chase.spv > chase.txt \[dissasembly binary to a readable assembly text
 Also im not including my own binaries for the compiled chase.spv as that could have some personal information about my pc, compile it for your own
 
 Same with chase.txt
+
+
+
+
+
+\#################################################################################################
+
+HOLY SHIT CHECK YOUR ARGUMENTS BEFOREHAND AND NEVER RUN RAW ADRESSES THAT CAN CORRUPT THE DRIVER
+
+
+
+DO NOT, I REPEAT, DO NOT WRITE BEYOND THE INTENDED BUFFER, RAW GPU POINTERS HAVE NO BOUNDS CHECKING
+
+
+
+SPIRV-VAL CANNOT SEE WITHIN RAW MEMORY ADDRESSES ON RUNTIME, IT CAN AND WILL BREAK GPU MEMORY ADDRESSES
+
+\#################################################################################################
+
+
+
+Currently, this is not safe to build and run on your machine, as i'm still figuring out memory addresses myself, i don't take responsibility if you break your drivers...
+
+...or gpu by building this in its current state
 

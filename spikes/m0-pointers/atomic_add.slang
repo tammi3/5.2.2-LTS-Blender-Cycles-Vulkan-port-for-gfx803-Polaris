@@ -18,7 +18,7 @@ float atomic_add_float(Atomic<uint>* addr, float v)
         uint original = addr->compareExchange(expected, desired);
         if (original == expected)
             return asfloat(original);  // we won the race
-        expected = original;           // somebody else changed it; retry
+        expected = original;           // somebody else changed it; retry, this makes it very slow
     }
 }
 

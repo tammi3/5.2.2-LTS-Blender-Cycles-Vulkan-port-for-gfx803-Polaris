@@ -1,2 +1,4 @@
 build/
 *.spv
+chase.txt
+atomic_add.txt

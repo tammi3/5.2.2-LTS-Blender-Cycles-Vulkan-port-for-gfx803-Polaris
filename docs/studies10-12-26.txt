@@ -1,0 +1,23 @@
+Slang to SPIRV is surprisingly similar to C#, C, C++, the translation between Slang and the binary is actually pretty interesting to see in the .txt file
+
+I was super scared of using git but as it turns out it's pretty simple, i'm still struggling to conceptually understand "shaders", i'm aware it's a program that...
+...can be executed in parallel in the gpu, i'm simply having a hard time finding a comparison to understand it as a concept
+
+This project seems actually decently feasible, admittedly it's gonna take a lot of work
+
+I've also learned a ton on how GPU code is written instead of it just being a black box, i obviously don't yet understand the full scope of it but Vulkan's awesome
+
+I learned:
+
+-
+basic git
+
+Basic Slang (that sounds hilarious out of context)
+How SPIR-V works and how it looks
+How GPU code is written (broadly speaking)
+What Atomic addition is, why do i need it and why floating point number addition is complicated, hence why it's emulated
+How to emulate float atomic addition
+
+-
+
+I need to properly understand exactly how Slang code turns into an actual image, and also how pathtracers work

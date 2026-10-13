@@ -1,23 +1,26 @@
-Slang to SPIRV is surprisingly similar to C#, C, C++, the translation between Slang and the binary is actually pretty interesting to see in the .txt file
+I thought that because floating point atomic numbers are supported with this gpu and vulkan version that i could've...
+... skip the step of turning it into an integer in the emulation process, however i realized that just wouldn't work, because addition...
+... is not supported, converting an atomic float into a float defeats the purpose of it, i just research if it's possible to make...
+... the memory address of it atomic, so 1) fetch atomic value , 2) regular addition, 3) turn it back on the atomic value, via the same or a different variable...
+... while that approach could technically work, it doesn't change much of how it already works, plus it wastes memory by using a float instead of an integer...
+... but it could be slightly faster, as it keeps using a float instead of bouncing around floats and integers
 
-I was super scared of using git but as it turns out it's pretty simple, i'm still struggling to conceptually understand "shaders", i'm aware it's a program that...
-...can be executed in parallel in the gpu, i'm simply having a hard time finding a comparison to understand it as a concept
+however the approach could be flawed as using a non-atomic float addition to skip it would just corrupt the value, so programs would need to be written so that they...
+...only access the first atomic variable, add, return, if it even worked, it would be forcing multiple threads to join in a single function, essentially turning a multi...
+...-threaded program into a single-threaded one,
 
-This project seems actually decently feasible, admittedly it's gonna take a lot of work
+quick update: no it doesn't make it into a single-threaded one, that's outright wrong, it's simply unsafe, i could just run it *really* fucking slow and controlled with...
+...addresses so that it never has a chance to accidentally create a race condition, but an emulation of it is just faster, thought of that as solution that although...
+...suboptimal, could work, unless i'm planning to re-write the entire Cycles source code so that i manually allocate every bite in memory and write the assembly in order...
+...myself, emulating it is the optimal solution.
 
-I've also learned a ton on how GPU code is written instead of it just being a black box, i obviously don't yet understand the full scope of it but Vulkan's awesome
+also a float and a uint are the same size in memory so it doesn't waste any
 
-I learned:
+#################################################################################################
+HOLY SHIT CHECK YOUR ARGUMENTS BEFOREHAND AND NEVER RUN RAW ADRESSES THAT CAN CORRUPT THE DRIVER
 
--
-basic git
+DO NOT, I REPEAT, DO NOT WRITE BEYOND THE INTENDED BUFFER, RAW GPU POINTERS HAVE NO BOUNDS CHECKING
 
-Basic Slang (that sounds hilarious out of context)
-How SPIR-V works and how it looks
-How GPU code is written (broadly speaking)
-What Atomic addition is, why do i need it and why floating point number addition is complicated, hence why it's emulated
-How to emulate float atomic addition
+SPIRV-VAL CANNOT SEE WITHIN RAW MEMORY ADDRESSES ON RUNTIME, IT CAN AND WILL BREAK GPU MEMORY ADDRESSES
+#################################################################################################
 
--
-
-I need to properly understand exactly how Slang code turns into an actual image, and also how pathtracers work
