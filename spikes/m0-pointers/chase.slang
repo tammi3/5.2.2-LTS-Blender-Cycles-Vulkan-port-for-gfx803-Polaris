@@ -11,10 +11,11 @@ struct Params
     uint* output;  // where to write the result
 };
 
-[[vk::push_constant]] ConstantBuffer<Params> params;
+[[vk::push_constant]] ConstantBuffer<Params> params; // fast push constant memory
 
 [shader("compute")]
 [numthreads(1, 1, 1)]
+
 void main()
 {
     uint sum = 0;
