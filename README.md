@@ -5,6 +5,7 @@ The point of this project is to use Vulkan as a backend for Cycles in Blender po
 That said, this is mostly a "for me" project, i wanted to learn how things worked so, this is not intended to be used professionally in any way
 
 
+
 Yes it would likely be easier to bring support for the modern Blender nodes and features back to 2.93 or forward port that version of Cycles so it works in older graphics cards
 But that wouldn't really be studying how code is written for SPIR, Slang, Vulkan, etc. so i'm taking the more complicated approach
 
@@ -14,6 +15,19 @@ for this v0 there's only a very simple .slang script that's compiled in (you wou
 
 copy this in your bash terminal:
 
-slangc chase.slang -target spirv -entry main -stage compute -o chase.spv [actual compilation]
-spirv-val --target-env vulkan1.3 chase.spv [spir validation for vulkan 1.3]
-spirv-dis chase.spv > chase.txt [dissasembly binary to a readable assembly text file]
+
+
+slangc chase.slang -target spirv -entry main -stage compute -o chase.spv \[actual compilation]
+
+
+spirv-val --target-env vulkan1.3 chase.spv \[spir validation for vulkan 1.3]
+
+
+spirv-dis chase.spv > chase.txt \[dissasembly binary to a readable assembly text file]
+
+
+
+Also im not including my own binaries for the compiled chase.spv as that could have some personal information about my pc, compile it for your own
+
+Same with chase.txt
+
