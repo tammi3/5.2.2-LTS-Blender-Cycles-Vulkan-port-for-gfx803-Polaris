@@ -1,0 +1,8 @@
+cd c:/dev/cycles-vulkan/spikes
+
+cycles_bvh_dump.exe won't run due to missing .dll files (the files are there, just not next to executable)
+
+c/dev/cycles-vulkan/tools/run_bvh_dump.sh temporarily puts the .dll s files in during the git bash session, remember to run it this way
+
+
+"c:/Program Files (x86)/Steam/steamapps/common/Blender/blender.exe" -b /c/dev/resources/blendfiles/yourfile.blend -P /c/dev/cycles/src/app/export_scene_xml.py -- /c/dev/yourdirectory/scenename.xml
